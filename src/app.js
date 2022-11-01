@@ -4,9 +4,9 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 
 
-import categoryRoute from '../routes/Categori';
-import bannerRoute from '../routes/Banner';
-import userRoute from '../routes/user'
+
+import bannerRoute from './routes/Banner';
+
 
 const app = express();
 
@@ -17,9 +17,9 @@ app.use(morgan('tiny'));
 app.use(express.json())
 
 // route
-app.use("/api",categoryRoute);
+
 app.use("/api",bannerRoute);
-app.use("/api",userRoute)
+
 
 
 // connnect database
