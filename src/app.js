@@ -3,10 +3,11 @@ import cors from 'cors';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 
-
-
-import bannerRoute from './routes/Banner';
-
+import orderRouter from "../routes/order";
+import bannerRouter from "../routes/Banner";
+import categoryRoute from '../routes/Categori';
+import productRoute from '../routes/product';
+import userRoute from '../routes/user'
 
 const app = express();
 
@@ -17,8 +18,11 @@ app.use(morgan('tiny'));
 app.use(express.json())
 
 // route
-
-app.use("/api",bannerRoute);
+app.use("/api",categoryRoute);
+app.use("/api",productRoute);
+app.use("/api",userRoute);
+app.use("/api",bannerRouter);
+app.use("/api", orderRouter);
 
 
 
