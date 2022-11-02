@@ -8,6 +8,9 @@ import bannerRouter from "../routes/Banner";
 import categoryRoute from '../routes/Categori';
 import productRoute from '../routes/product';
 import userRoute from '../routes/user'
+import favoritesProductRouter from '../routes/favoritesProduct';
+import orderDetailRouter from '../routes/orderDetail'
+import orderLogRouter from '../routes/orderLog'
 
 const app = express();
 
@@ -23,6 +26,9 @@ app.use("/api",productRoute);
 app.use("/api",userRoute);
 app.use("/api",bannerRouter);
 app.use("/api", orderRouter);
+app.use("/api", favoritesProductRouter);
+app.use("/api", orderDetailRouter);
+app.use("/api", orderLogRouter);
 
 
 
