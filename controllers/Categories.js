@@ -1,6 +1,7 @@
 import Category from '../models/Categori';
-
+import slug from 'slug';
 export const create = async (req, res) => {
+   
     try {
         const category = await new Category(req.body).save()
         res.json(category);

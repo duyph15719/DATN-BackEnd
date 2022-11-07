@@ -1,5 +1,5 @@
 import Product from "../models/product"
-
+// import slugify from "slugify"
 export const listProduct = async (request, response) => {
     try{
         const product = await Product.find().exec()
