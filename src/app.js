@@ -20,7 +20,7 @@ app.use(cors());
 app.use(morgan('tiny'));
 app.use(express.json())
 
-// route
+// route 12333
 app.use("/api",categoryRoute);
 app.use("/api",productRoute);
 app.use("/api",userRoute);
