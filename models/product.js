@@ -33,6 +33,9 @@ const productSchema = new Schema({
         ref: "Category",
 
     },
+    gale: {
+        type: String,
+    }
     // slug: {
     //     type: String,
     //     required: true,
