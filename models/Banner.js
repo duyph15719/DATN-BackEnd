@@ -18,6 +18,6 @@ const bannerSchema = new Schema({
         type: Number,
         default: 0,
     },
-}, { timestamps: true});
+}, { timestamps: true });
 
 export default mongoose.model("Banner", bannerSchema);
