@@ -7,10 +7,10 @@ const sizeSchema = new Schema({
         required: true,
         uppercase: true,
     },
-    priceIncrease: {
-        type: Number,
-        required: true
-    },
+    // priceIncrease: {
+    //     type: Number,
+    //     required: true
+    // },
 }, { timestamps: true });
 
 sizeSchema.index({ '$**': 'text' });
