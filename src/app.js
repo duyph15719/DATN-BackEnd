@@ -12,6 +12,7 @@ import favoritesProductRouter from '../routes/favoritesProduct';
 import orderDetailRouter from '../routes/orderDetail'
 import orderLogRouter from '../routes/orderLog'
 import sizeRouter from "../routes/size";
+import colorRoute from "../routes/Color";
 const app = express();
 
 const URL = 'mongodb+srv://duynguyen:Adu113210@cluster0.fh8cjz8.mongodb.net/?retryWrites=true&w=majority';
@@ -22,6 +23,7 @@ app.use(express.json())
 
 // route 12333
 app.use("/api", categoryRoute);
+app.use("/api", colorRoute);
 app.use("/api", productRoute);
 app.use("/api", userRoute);
 app.use("/api", bannerRouter);
