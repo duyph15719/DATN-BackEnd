@@ -11,7 +11,7 @@ import userRoute from '../routes/user'
 import favoritesProductRouter from '../routes/favoritesProduct';
 import orderDetailRouter from '../routes/orderDetail'
 import orderLogRouter from '../routes/orderLog'
-import sizeRouter from "./routes/size";
+import sizeRouter from "../routes/size";
 const app = express();
 
 const URL = 'mongodb+srv://duynguyen:Adu113210@cluster0.fh8cjz8.mongodb.net/?retryWrites=true&w=majority';
