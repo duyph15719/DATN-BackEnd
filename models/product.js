@@ -1,4 +1,4 @@
-import { Schema, model, ObjectId } from "mongoose";
+import mongoose, { Schema, model, ObjectId } from "mongoose";
 
 const productSchema = new Schema({
     name: {
@@ -35,7 +35,17 @@ const productSchema = new Schema({
     },
     gale: {
         type: String,
-    }
+    },
+    idSize: [{
+        type: mongoose.Schema.ObjectId,
+        ref: "Size",
+        required: true
+    }],
+    idcolor: [{
+        type: mongoose.Schema.ObjectId,
+        ref: "Color",
+        required: true
+    }]
     // slug: {
     //     type: String,
     //     required: true,
