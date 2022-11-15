@@ -1,47 +1,90 @@
-import mongoose, { Schema} from "mongoose";
-import { createHmac} from 'crypto'; 
+import { createHmac } from 'crypto';
+import { Schema, model } from "mongoose";
+
 const userSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        maxLength: 30
-    },
     email: {
         type: String,
-        required: true
-    },
-    salt: {
-        type: String
+        required: true,
+        unique: true
     },
     password: {
         type: String,
+        required: true,
+        min: 4
+    },
+    username: {
+        type: String,
+        unique: true,
+        lowercase: true,
         required: true
+    },
+    fullName: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true
+    },
+    wardsCode: {
+        type: Number,
+        required: true,
+        default: 0,
+    },
+    districtCode: {
+        type: Number,
+        required: true,
+        default: 0,
+    },
+    provinceCode: {
+        type: Number,
+        required: true,
+        default: 0,
+    },
+    address: {
+        type: String,
+        default: ""
+    },
+    avatar: {
+        type: String,
     },
     role: {
         type: Number,
-        default: 0
+        default: 0,
     },
-    image:{
-        type: String,
+    active: {
+        type: Number,
+        default: 0,
     }
-}, { timestamps: true});
+}, { timestamps: true });
 
 userSchema.methods = {
-    authenticate(password){ //123456
-        return this.password == this.encrytPassword(password);
+    authenticate(password) {
+        return this.password === this.encryptPassword(password);
     },
-    encrytPassword(password){
-        if(!password) return 
+    encryptPassword(password) {
+        if (!password) return;
         try {
-            return createHmac("sha256", "abcs").update(password).digest("hex");
+            return createHmac("SHA256", "DATN").update(password).digest("hex");
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 }
-// trước khi execute .save() thì chạy middleware sau.
-userSchema.pre("save", function(next){
-    this.password = this.encrytPassword(this.password);
+
+userSchema.pre("save", function (next) {
+    this.password = this.encryptPassword(this.password);
     next();
-})
-export default mongoose.model('User', userSchema);
+});
+
+userSchema.pre("findOneAndUpdate", function (next) {
+    if (this._update.password) {
+        this._update.password = createHmac("SHA256", "DATN").update(this._update.password).digest("hex")
+    }
+    next();
+});
+
+userSchema.index({'$**': 'text'});
+
+export default model("User", userSchema);
+

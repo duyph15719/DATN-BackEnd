@@ -35,6 +35,10 @@ const productSchema = new Schema({
     },
     gale: {
         type: String,
+    },
+    colorId:{
+        type: ObjectId,
+        ref: "Color"
     }
     // slug: {
     //     type: String,
