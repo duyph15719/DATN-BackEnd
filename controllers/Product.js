@@ -2,7 +2,7 @@ import Product from "../models/product"
 // import slugify from "slugify"
 export const listProduct = async (request, response) => {
     try {
-        const product = await Product.find().populate("categoryId").exec()
+        const product = await Product.find().populate("categoryId").populate("idSize").populate("idcolor").exec()
         response.json(product)
     } catch (error) {
         response.status(400).json({ message: "Loi" })
