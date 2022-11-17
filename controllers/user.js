@@ -1,57 +1,91 @@
 import User from "../models/user";
 import jwt from 'jsonwebtoken';
 
-// API signup
-export const signup = async (req, res) => {
-    const { email, name, password} = req.body
+export const signin = async (req, res) => {
+    const { email, password } = req.body;
+
     try {
-        const existUser = await User.findOne({email}).exec();
-        if(existUser){
+        const user = await User.findOne({ email }).exec();
+
+        if (!user) {
+            res.status(400).json({
+                message: "Email không tồn tại"
+            });
+        } else if (!user.authenticate(password)) {
+            res.status(400).json({
+                message: "Mật khẩu không chính xác"
+            });
+        } else {
+            const { _doc: { password: hashed_password, __v, ...rest } } = user;
+            const token = jwt.sign({ _id: user._id, email: user.email }, "DATN", { expiresIn: "3h" });
+    
             res.json({
-                message: "Email đã tồn tại"
-            })
-        };
-        const user = await new User({email, name, password}).save();
-        res.json({
-            user: {
-                _id: user._id,
-                email: user.email,
-                name: user.name
-            }
-        })
+                token,
+                user: rest
+            });
+        }
     } catch (error) {
-        
+        res.status(400).json({
+            message: "Lỗi",
+        });
+    }
+
+};
+
+export const signup = async (req, res) => {
+    try {
+        const exitsEmail = await User.findOne({ email: req.body.email }).exec();
+
+        if (exitsEmail) {
+            res.status(400).json({
+                message: "Email đã tồn tại trên hệ thống"
+            });
+        }
+
+        const { _id, email, fullName, username, phone, role, active, avatar } = await new User(req.body).save();
+
+        res.json({
+            _id,
+            email,
+            fullName,
+            username,
+            phone,
+            role,
+            active,
+            avatar
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: "Đăng ký tài khoản không thành công",
+            error
+        });
     }
 }
-// API signin
-export const signin = async (req, res) => {
-    const { email, password} = req.body;
+
+export const checkPassword = async (req, res) => {
+    const { _id, password } = req.body;
+
     try {
-        const user = await User.findOne({email}).exec();
-        if(!user){
+        const user = await User.findById(_id).exec();
+        if (!user) {
             res.status(400).json({
-                message: "email không tồn tại"
-            })
-        }
-        if(!user.authenticate(password)){
+                message: "Không tìm thấy User"
+            });
+        } else if (!user.authenticate(password)) {
             res.status(400).json({
-                message: "Sai mật khẩu"
-            })
+                message: "Mật khẩu không chính xác"
+            });
+        } else {
+            res.json({
+                message: "Mật khẩu chính xác",
+                success: true
+            });
         }
-
-        const token = jwt.sign({_id: user._id }, "123456", { expiresIn: 60 * 60})
-
-        res.json({
-            token,
-            user: {
-                _id: user._id,
-                email: user.email,
-                name: user.name,
-                role: user.role
-            }
-        })
-    } catch (error) {
         
+    } catch (error) {
+        res.status(400).json({
+            message: "Có lỗi xảy ra"
+        });
     }
 }
 export const userById = async (req, res, next, id) => {
