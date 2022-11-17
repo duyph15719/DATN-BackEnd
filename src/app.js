@@ -13,6 +13,7 @@ import orderDetailRouter from '../routes/orderDetail'
 import orderLogRouter from '../routes/orderLog'
 import sizeRouter from "../routes/size";
 import colorRoute from "../routes/Color";
+import quantityRoute from "../routes/Quantity";
 const app = express();
 
 const URL = 'mongodb+srv://duynguyen:Adu113210@cluster0.fh8cjz8.mongodb.net/?retryWrites=true&w=majority';
@@ -32,7 +33,7 @@ app.use("/api", favoritesProductRouter);
 app.use("/api", orderDetailRouter);
 app.use("/api", orderLogRouter);
 app.use("/api", sizeRouter);
-
+app.use("/api", quantityRoute);
 
 // connnect database
 mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
