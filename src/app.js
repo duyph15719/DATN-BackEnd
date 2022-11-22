@@ -14,6 +14,7 @@ import orderLogRouter from '../routes/orderLog'
 import sizeRouter from "../routes/size";
 import colorRoute from "../routes/Color";
 import quantityRoute from "../routes/Quantity";
+import receiptRoute from "../routes/Receipt";
 const app = express();
 
 const URL = 'mongodb+srv://duynguyen:Adu113210@cluster0.fh8cjz8.mongodb.net/?retryWrites=true&w=majority';
@@ -34,6 +35,7 @@ app.use("/api", orderDetailRouter);
 app.use("/api", orderLogRouter);
 app.use("/api", sizeRouter);
 app.use("/api", quantityRoute);
+app.use("/api", receiptRoute);
 
 // connnect database
 mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })

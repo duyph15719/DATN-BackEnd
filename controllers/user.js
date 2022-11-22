@@ -42,17 +42,14 @@ export const signup = async (req, res) => {
             });
         }
 
-        const { _id, email, fullName, username, phone, role, active, avatar } = await new User(req.body).save();
+        const { _id, email, username, phone, role } = await new User(req.body).save();
 
         res.json({
             _id,
             email,
-            fullName,
             username,
             phone,
             role,
-            active,
-            avatar
         });
     } catch (error) {
         res.status(400).json({
@@ -100,18 +97,6 @@ export const userById = async (req, res, next, id) => {
         next();
     } catch (error) {
         
-    }
-}
-// API create
-export const createUser = async (req, res) => {
-    try {
-        const user = await new User(req.body).save();
-        console.log('user', user);
-        res.json(user)    
-    } catch (error) {
-        res.status(400).json({
-            message: "Không thêm được sản phẩm anh ei"
-        })
     }
 }
 // API list 

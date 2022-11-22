@@ -18,44 +18,14 @@ const userSchema = new Schema({
         lowercase: true,
         required: true
     },
-    fullName: {
-        type: String,
-        required: true
-    },
     phone: {
         type: String,
         required: true
-    },
-    wardsCode: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-    districtCode: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-    provinceCode: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-    address: {
-        type: String,
-        default: ""
-    },
-    avatar: {
-        type: String,
     },
     role: {
         type: Number,
         default: 0,
     },
-    active: {
-        type: Number,
-        default: 0,
-    }
 }, { timestamps: true });
 
 userSchema.methods = {
