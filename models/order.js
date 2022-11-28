@@ -1,44 +1,34 @@
-import { Schema, model } from "mongoose";
+import { Schema, model ,ObjectId} from "mongoose";
 
 const orderSchema = new Schema({
-    userId: {
+    name: {
         type: String,
-    },
-    customerName: {
-        type: String,
-        required: true,
-    },
-    address: {
-        type: String,
-        required: true,
-    },
-    phone: {
-        type: String,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-    },
-    totalPrice: {
-        type: Number,
-        required: true,
-    },
-    priceDecrease: {
-        type: Number,
-        default: 0
-    },
-    message: {
-        type: String,
-        default: ""
+        trim: true,
+        unique: true,
+        index: true,
     },
     status: {
         type: Number,
-        default: 0
+        default: 0,
     },
-    voucher: {
-        type: Array,
-        default: []
+    address: {
+        type: String,
+        require:true,   
+    },
+    payments: {
+        type: Number,
+        default: 0,
+    },
+    phone: {
+        type: Number,
+        default: 0,
+    },
+    note: {
+        type: String,
+    },
+    UserId: {
+        type: ObjectId,
+        ref: "User",
     },
 }, { timestamps: true });
 
