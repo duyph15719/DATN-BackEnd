@@ -36,22 +36,24 @@ const productSchema = new Schema({
     gale: {
         type: String,
     },
-    idSize: [{
-        type: mongoose.Schema.ObjectId,
-        ref: "Size",
-        required: true
-    }],
-    idcolor: [{
-        type: mongoose.Schema.ObjectId,
-        ref: "Color",
-        required: true
+    colors: [{
+        colorName: {
+            type: String,
+            required: true,
+        },
+        sizes: [{
+            sizeName: {
+                type: String,
+                required: true,
+            },
+            amount: {
+                type: Number,
+                required: true
+            }
+        }]
     }]
-    // slug: {
-    //     type: String,
-    //     required: true,
-    //     unique: true,
-    //     lowercase: true,
-    // }
+
+
 }, { timestamps: true });
 
 productSchema.index({ '$**': 'text' });
