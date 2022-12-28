@@ -1,11 +1,15 @@
 import { Schema, model ,ObjectId} from "mongoose";
 
 const orderSchema = new Schema({
+    
     name: {
         type: String,
         trim: true,
-        unique: true,
-        index: true,
+        require:true,
+    },
+    email:{
+        type: String,
+        require:true, 
     },
     status: {
         type: Number,
@@ -26,10 +30,16 @@ const orderSchema = new Schema({
     note: {
         type: String,
     },
+    city:{
+        type: String,
+    },
     UserId: {
         type: ObjectId,
         ref: "User",
     },
+    total:{
+        type:Number,
+    }
 }, { timestamps: true });
 
 orderSchema.index({'$**': 'text'});

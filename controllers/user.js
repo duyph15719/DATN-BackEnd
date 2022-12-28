@@ -106,7 +106,7 @@ export const listUser = async (req, res) => {
         res.json(users);
     } catch (error) {
         res.status(400).json({
-            message: "Lỗi không tìm được sản phẩm"
+            message: "Lỗi không tìm được tài khoản"
         })
     }
 }
@@ -118,7 +118,7 @@ export const readUser = async (req, res) => {
         res.json(user);
     } catch (error) {
         res.status(400).json({
-            message: "Lỗi không tìm được sản phẩm"
+            message: "Lỗi không tìm được tài khoản"
         })
     }
 }
@@ -133,7 +133,7 @@ export const removeUser = async (req, res) => {
         });
     } catch (error) {
         res.status(400).json({
-            message: "Lỗi không tìm được sản phẩm"
+            message: "Lỗi không tìm được tài khoản"
         })
     }
 }
@@ -147,7 +147,7 @@ export const updateUser = async (req, res) => {
         res.json(user);
     } catch (error) {
         res.status(400).json({
-            message: "Lỗi không tìm được sản phẩm"
+            message: "Lỗi không tìm được tài khoản"
         })
     }
 }

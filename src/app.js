@@ -10,7 +10,6 @@ import productRoute from '../routes/product';
 import userRoute from '../routes/user'
 import favoritesProductRouter from '../routes/favoritesProduct';
 import orderDetailRouter from '../routes/orderDetail'
-import orderLogRouter from '../routes/orderLog'
 import sizeRouter from "../routes/size";
 import colorRoute from "../routes/Color";
 import quantityRoute from "../routes/Quantity";
@@ -32,7 +31,6 @@ app.use("/api", bannerRouter);
 app.use("/api", orderRouter);
 app.use("/api", favoritesProductRouter);
 app.use("/api", orderDetailRouter);
-app.use("/api", orderLogRouter);
 app.use("/api", sizeRouter);
 app.use("/api", quantityRoute);
 

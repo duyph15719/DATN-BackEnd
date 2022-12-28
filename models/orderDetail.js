@@ -5,43 +5,37 @@ const orderSchema = new Schema({
         type: ObjectId,
         ref: "Order"
     },
-    productId: {
+    ProductsId: {
         type: ObjectId,
         ref: "Product"
     },
-    productPrice: {
-        type: Number,
-        required: true,
+    productName:{
+        type:String
+    },
+    price: {
+        type: String,
     },
     sizeId: {
         type: ObjectId,
         ref: "Size"
     },
-    sizePrice: {
+    sizeName: {
         type: Number,
-        required: true,
+    },
+    colorId: {
+        type: ObjectId,
+        ref: "Color"
+    },
+    colorName: {
+        type: String,
     },
     quantity: {
         type: Number,
-        required: true,
     },
-    ice: {
+    total:{
         type: Number,
-        required: true,
-    },
-    sugar: {
-        type: Number,
-        required: true,
-    },
-    toppingId: {
-        type: ObjectId,
-        ref: "Topping",
-        default: ""
-    },
-    toppingPrice: {
-        type: Number,
-        required: true,
-    },
+    }
+
 }, { timestamps: true });
 
 orderSchema.index({'$**': 'text'});
