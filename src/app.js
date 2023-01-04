@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 
 import orderRouter from "../routes/order";
+import orderHistoryRouter from "../routes/orderHistory";
 import bannerRouter from "../routes/Banner";
 import categoryRoute from '../routes/Categori';
 import productRoute from '../routes/product';
@@ -29,6 +30,7 @@ app.use("/api", productRoute);
 app.use("/api", userRoute);
 app.use("/api", bannerRouter);
 app.use("/api", orderRouter);
+app.use("/api", orderHistoryRouter);
 app.use("/api", favoritesProductRouter);
 app.use("/api", orderDetailRouter);
 app.use("/api", sizeRouter);
