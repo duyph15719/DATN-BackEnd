@@ -5,7 +5,7 @@ const orderLogsSchema = new Schema({
         type: ObjectId,
         ref: "Order"
     },
-    status: {
+    statusOrderLogs: {
         type: Number,
         required: true
     },
