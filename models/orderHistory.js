@@ -13,7 +13,11 @@ const orderLogsSchema = new Schema({
         type: ObjectId,
         ref: "User",
         transform: v => v == null ? '' : v
-    }
+    },
+    userName: {
+        type: String,
+        required: true
+    },
 }, { timestamps: true });
 
 orderLogsSchema.index({'$**': 'text'});
