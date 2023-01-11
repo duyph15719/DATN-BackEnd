@@ -14,7 +14,7 @@ const userSchema = new Schema({
     },
     username: {
         type: String,
-        unique: true,
+
         lowercase: true,
         required: true
     },
@@ -54,7 +54,7 @@ userSchema.pre("findOneAndUpdate", function (next) {
     next();
 });
 
-userSchema.index({'$**': 'text'});
+userSchema.index({ '$**': 'text' });
 
 export default model("User", userSchema);
 
