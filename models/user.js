@@ -10,21 +10,32 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        min: 4
+        min: 6
     },
-    username: {
+    firstName: {
         type: String,
-        unique: true,
-        lowercase: true,
+        required: true
+    },
+    lastName: {
+        type: String,
         required: true
     },
     phone: {
         type: String,
         required: true
     },
+    birthday: {
+        type: String,
+    },
+    gender: {
+        type: String,
+    },
     role: {
         type: Number,
         default: 0,
+    },
+    note: {
+        type: String,
     },
 }, { timestamps: true });
 

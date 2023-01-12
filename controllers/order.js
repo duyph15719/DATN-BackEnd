@@ -34,7 +34,7 @@ export const list = async (req, res) => {
     let sortOpt = {};
     if (req.query["_sort"]) {
         const sortArr = req.query["_sort"].split(",");
-        const orderArr = (req.query["_order"] || "").split(",");
+        const orderArr = (req.query["_orders"] || "").split(",");
 
         sortArr.forEach((sort, index) => {
             sortOpt[sort] = orderArr[index] === "desc" ? -1 : 1;

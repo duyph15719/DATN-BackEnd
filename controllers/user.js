@@ -18,7 +18,7 @@ export const signin = async (req, res) => {
         } else {
             const { _doc: { password: hashed_password, __v, ...rest } } = user;
             const token = jwt.sign({ _id: user._id, email: user.email }, "DATN", { expiresIn: "3h" });
-    
+
             res.json({
                 token,
                 user: rest
@@ -42,13 +42,17 @@ export const signup = async (req, res) => {
             });
         }
 
-        const { _id, email, username, phone, role } = await new User(req.body).save();
+        const { _id, email, firstName, lastName, phone, birthday, gender, note, role } = await new User(req.body).save();
 
         res.json({
             _id,
+            firstName,
+            lastName,
             email,
-            username,
             phone,
+            birthday,
+            gender,
+            note,
             role,
         });
     } catch (error) {
@@ -78,7 +82,7 @@ export const checkPassword = async (req, res) => {
                 success: true
             });
         }
-        
+
     } catch (error) {
         res.status(400).json({
             message: "Có lỗi xảy ra"
@@ -88,7 +92,7 @@ export const checkPassword = async (req, res) => {
 export const userById = async (req, res, next, id) => {
     try {
         const user = await User.findById(id).exec();
-        if(!user){
+        if (!user) {
             res.status(400).json({
                 message: "Không tìm thấy user"
             })
@@ -96,13 +100,13 @@ export const userById = async (req, res, next, id) => {
         req.profile = user;
         next();
     } catch (error) {
-        
+
     }
 }
 // API list 
-export const listUser = async (req, res) => { 
+export const listUser = async (req, res) => {
     try {
-        const users = await User.find().sort({createAt: -1});
+        const users = await User.find().sort({ createAt: -1 });
         res.json(users);
     } catch (error) {
         res.status(400).json({
@@ -112,7 +116,7 @@ export const listUser = async (req, res) => {
 }
 // API read
 export const readUser = async (req, res) => {
-    const filter = { _id: req.params.id}
+    const filter = { _id: req.params.id }
     try {
         const user = await User.findOne(filter);
         res.json(user);
@@ -124,7 +128,7 @@ export const readUser = async (req, res) => {
 }
 // API remove
 export const removeUser = async (req, res) => {
-    const condition = { _id: req.params.id}
+    const condition = { _id: req.params.id }
     try {
         const user = await User.findOneAndDelete(condition);
         res.json({
@@ -139,9 +143,9 @@ export const removeUser = async (req, res) => {
 }
 // API update
 export const updateUser = async (req, res) => {
-    const condition = { _id: req.params.id};
+    const condition = { _id: req.params.id };
     const doc = req.body;
-    const option = { new: true};
+    const option = { new: true };
     try {
         const user = await User.findOneAndUpdate(condition, doc, option);
         res.json(user);

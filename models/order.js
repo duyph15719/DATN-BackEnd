@@ -1,15 +1,13 @@
 import { Schema, model ,ObjectId} from "mongoose";
 
 const orderSchema = new Schema({
-    
-    name: {
-        type: String,
-        trim: true,
-        require:true,
-    },
     email:{
         type: String,
         require:true, 
+    },
+    name: {
+        type: String,
+        require:true,
     },
     status: {
         type: Number,
