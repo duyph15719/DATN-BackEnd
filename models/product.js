@@ -7,6 +7,9 @@ const productSchema = new Schema({
         unique: true,
         index: true,
     },
+    slug: {
+        type: String,
+    },
     image: {
         type: String,
 

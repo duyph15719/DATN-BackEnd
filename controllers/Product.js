@@ -1,5 +1,5 @@
 import Product from "../models/product"
-// import slugify from "slugify"
+import slugify from "slugify"
 export const listProduct = async (request, response) => {
     try {
         const product = await Product.find().populate("categoryId").populate('colors').exec()
@@ -17,15 +17,31 @@ export const listProductDetail = async (request, response) => {
         response.status(400).json({ message: "Lỗi data" })
     }
 }
-export const createProduct = async (request, response) => {
-    console.log(request.body);
+export const createProduct = async (req, res) => {
+    const slug = slugify(req.body.name, {
+        lower: true,
+        locale: "vi",
+    });
+    req.body.slug = slug;
     try {
-        const product = await Product(request.body).save()
-        response.json(product)
+        const product = await Product(req.body).save();
+        res.json(product);
     } catch (error) {
-        response.status(400).json({ message: "k thể thêm sp" })
+        console.log(error);
+        res.status(400).json({
+            message: "khong them duoc du lieu",
+        });
     }
-}
+};
+// export const createProduct = async (request, response) => {
+//     console.log(request.body);
+//     try {
+//         const product = await Product(request.body).save()
+//         response.json(product)
+//     } catch (error) {
+//         response.status(400).json({ message: "k thể thêm sp" })
+//     }
+// }
 export const deleteProduct = async (request, response) => {
     try {
         const product = await Product.findOneAndDelete({ _id: request.params.id }).exec()
@@ -36,10 +52,28 @@ export const deleteProduct = async (request, response) => {
 
 }
 export const updateProduct = async (request, response) => {
+    const slug = slugify(request.body.name, {
+        lower: true,
+        locale: "vi",
+    });
+    request.body.slug = slug;
     try {
         const product = await Product.findOneAndUpdate({ _id: request.params.id }, request.body, { new: true }).exec()
         response.json(product)
     } catch (error) {
         response.status(400).json({ message: "k thể update sp" })
+    }
+}
+
+export const productFilter = async (req, res) => {
+    try {
+        const { data } = req.body;
+        const product = await Product.find({ categoryId: data });
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Không có sản phẩm phù hợp',
+            error
+        })
     }
 }
