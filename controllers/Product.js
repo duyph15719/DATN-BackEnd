@@ -2,7 +2,7 @@ import Product from "../models/product"
 import slugify from "slugify"
 export const listProduct = async (request, response) => {
     try {
-        const product = await Product.find().populate("categoryId").populate('colors').exec()
+        const product = await Product.find().populate("categoryId").exec()
         response.json(product)
     } catch (error) {
         response.status(400).json({ message: "Loi" })
@@ -65,15 +65,3 @@ export const updateProduct = async (request, response) => {
     }
 }
 
-export const productFilter = async (req, res) => {
-    try {
-        const { data } = req.body;
-        const product = await Product.find({ categoryId: data });
-        res.json(product);
-    } catch (error) {
-        res.status(500).json({
-            message: 'Không có sản phẩm phù hợp',
-            error
-        })
-    }
-}
