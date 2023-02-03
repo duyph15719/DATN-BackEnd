@@ -64,4 +64,21 @@ export const updateProduct = async (request, response) => {
         response.status(400).json({ message: "k thể update sp" })
     }
 }
+export const productSearch = async (req, res) => {
+    const searchField = req.query.q;
+    try {
+        const blogSearch = await Product.find({
+            name: { $regex: searchField, $options: "$i" },
+        })
+            .populate("categoryId")
+            .sort({ createdAt: -1 });
+
+        return res.json(blogSearch);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Không có sản phẩm phù hợp',
+            error
+        })
+    }
+}
 
