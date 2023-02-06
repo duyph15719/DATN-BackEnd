@@ -18,6 +18,10 @@ const orderLogsSchema = new Schema({
         type: String,
         required: true
     },
+    reasonOfOrder: {
+        type: String
+    },
+
 }, { timestamps: true });
 
 orderLogsSchema.index({'$**': 'text'});
