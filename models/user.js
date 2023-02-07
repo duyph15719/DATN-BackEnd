@@ -38,6 +38,10 @@ const userSchema = new Schema({
         type: Number,
         default: 0,
     },
+    status: {
+        type: Number,
+        default: 0,
+    },
     note: {
         type: String,
     },
