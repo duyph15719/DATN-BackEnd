@@ -11,10 +11,9 @@ import productRoute from '../routes/product';
 import userRoute from '../routes/user'
 import favoritesProductRouter from '../routes/favoritesProduct';
 import orderDetailRouter from '../routes/orderDetail'
-import sizeRouter from "../routes/size";
-import colorRoute from "../routes/Color";
-import quantityRoute from "../routes/Quantity";
 
+
+import newRoute from "../routes/New";
 const app = express();
 
 const URL = 'mongodb+srv://duynguyen:Adu113210@cluster0.fh8cjz8.mongodb.net/?retryWrites=true&w=majority';
@@ -25,7 +24,7 @@ app.use(express.json())
 
 // route 12333
 app.use("/api", categoryRoute);
-app.use("/api", colorRoute);
+
 app.use("/api", productRoute);
 app.use("/api", userRoute);
 app.use("/api", bannerRouter);
@@ -33,9 +32,8 @@ app.use("/api", orderRouter);
 app.use("/api", orderHistoryRouter);
 app.use("/api", favoritesProductRouter);
 app.use("/api", orderDetailRouter);
-app.use("/api", sizeRouter);
-app.use("/api", quantityRoute);
 
+app.use("/api", newRoute);
 // connnect database
 mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Kết nối db thành công"))

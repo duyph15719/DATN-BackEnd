@@ -8,7 +8,10 @@ const categorySchema = new Schema({
     slug: {
         type: String,
     },
-    image: String
+    image: {
+        type: String,
+        required: true,
+    }
 }, { timestamps: true });
 
 export default mongoose.model("Category", categorySchema);
